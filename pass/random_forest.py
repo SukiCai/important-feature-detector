@@ -1,3 +1,4 @@
+
 import re
 import sys
 import time
@@ -6,6 +7,8 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+import plotly
+import plotly.graph_objs as go
 from pandas import *
 from sklearn import metrics
 from collections import Counter
@@ -25,6 +28,7 @@ class RandomForest:
     columns_to_drop = []            # Auto optimized
     data = pd.DataFrame()
     columns_to_recover = pd.DataFrame()
+    result = []
 
     # Parameterized constructor
     def __init__(self, analyze_file, result_file, classify_target, target_accuracy, cutoff, manul_drop):
@@ -36,6 +40,8 @@ class RandomForest:
         self.columns_manul_drop = manul_drop
 
     # Helper Functions
+    def get_result(self):
+        return self.result
     def clean_rows(self,df):
         assert isinstance(df, pd.DataFrame), "df needs to be a pd.DataFrame"
         df.dropna(inplace=True)
@@ -57,14 +63,30 @@ class RandomForest:
         self.columns_contain_string = []
         self.start()
         sys.exit()
-    def visualize(self,feature_imp):
-        feature_imp.sort_values(inplace=True,ascending=False)
-        sns.barplot(x=feature_imp, y=feature_imp.index)
-        plt.xlabel('Feature Importance Score')
-        plt.ylabel('Features')
-        plt.title("Visualizing Important Features")
-        plt.legend()
-        plt.show()
+    def visualize(self):
+        df = pd.read_csv("code/output/features_ranking.csv")
+        # Create a trace
+        data = [go.Scatter(
+            x = df['Feature'],
+            y = df['Weight'],
+        )]
+        layout = go.Layout(
+                xaxis=dict(
+                    title='Feature',    
+                ),
+                yaxis=dict(
+                    title='Weight',  
+                )
+            )
+        fig = go.Figure(data=data, layout=layout)
+        plotly.offline.plot(fig,filename='code/output/feature_ranking.html',config={'displayModeBar': False})
+        # feature_imp.sort_values(inplace=True,ascending=False)
+        # sns.barplot(x=feature_imp, y=feature_imp.index)
+        # plt.xlabel('Feature Importance Score')
+        # plt.ylabel('Features')
+        # plt.title("Visualizing Important Features")
+        # plt.legend()
+        # plt.savefig('code/output/feature_ranking.png')
 
     def start(self):
     # 0. Data Cleanning
@@ -75,6 +97,7 @@ class RandomForest:
         self.clean_columns(self.data)
         self.clean_rows(self.data)
         self.buildRandomForest()
+        self.visualize()
 
     def buildRandomForest(self):
     # 1. Build the Classifier
@@ -93,7 +116,9 @@ class RandomForest:
     # 2. Finding Important Features
         feature_imp = pd.Series(clf.feature_importances_,index=data.columns.drop(self.label_column))
         feature_imp_sorted = feature_imp.sort_values(ascending=False)
-        print(feature_imp_sorted)
+        feature_imp_sorted.index.name = "Feature"
+        self.result = feature_imp_sorted
+        feature_imp_sorted.to_csv("code/output/features_ranking.csv",header=["Weight"])
         last_index= len(feature_imp_sorted) - 1
         # Rebuild the whole modle until reaching the pre-set accuracy
         if (metrics.accuracy_score(y_test, y_pred) < self.pre_set_accuracy):
@@ -103,7 +128,7 @@ class RandomForest:
             elif (feature_imp_sorted[last_index] < self.pre_set_threshold):
                 column_to_drop = feature_imp_sorted[feature_imp_sorted == feature_imp_sorted[last_index]].index[0]
                 self.columns_to_drop.append(column_to_drop)
-                print(self.columns_to_drop)
+                # print(self.columns_to_drop)
             self.rebuild()
         pd.DataFrame(self.columns_to_drop).to_csv("code/output/columns_dropped.csv",index=False,header=False)
     # 4. Weight the indicator
@@ -118,6 +143,4 @@ class RandomForest:
     # 5. Store weigted indicator
         data = pd.concat((self.columns_to_recover,data),axis=1, join="inner")
         data.to_csv(self.result_to_store,index=False,header=True)
-    # 7. Visualize Result - Bar Chart
-        # self.visualize(feature_imp)
-print("SUKSUKSI")
+        

@@ -3,7 +3,7 @@
     <head>
         <meta name="viewport" content="with=device-width, initial-scale=1.0">
         <title>SukiCai's Projects</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="./static/project.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Akshar&family=Quicksand:wght@300&display=swap" rel="stylesheet">
@@ -12,7 +12,7 @@
     <body>
         <section class = "header">
             <nav>
-                <a href="index.html"><img src="images/logo.png" width="150" height="50"></a>
+                <a href="project.html"><img src="./images/logo.png" width="150" height="50"></a>
                 <div class="nav-links" id="navLinks">
                     <i class="fa fa-times" onclick="hideMenu()"></i>
                     <ul>
@@ -26,9 +26,23 @@
             </nav>
             <div class="text-box">
                 <h1>Important Features Detector</h1>
-                <p>Efficient way to get ranked features importances</p>
-                <a href="" class="hero-btn">Visit Us To Know More</a>
-            </div>
+                <form action="upload.php" method="post" enctype="multipart/form-data">
+                    Select image to upload:
+                    <input type="file" name="fileToUpload" id="fileToUpload">
+                    <input type="submit" value="Upload Image" name="submit">
+                </form>
+                <a href="" class="hero-btn">Analyze</a>
+                <form class="hero-btn" action="/result" method="POST">
+                    {% if name %}
+                      <center>
+                        <h3 style="color: black;" class="hero_btn">Analyze Result: {{name}}</h3>
+                      </center> 
+                    {% endif %}  
+                    <label for="name">Enter your name:</label>
+                    <input type="text" id="name" name="name">
+                    <center><input class="file_submit" type="Submit"></center>
+                  </form>
+            </div>         
         </section>
         <!-- ------- project ------- -->
         <section class="project">
