@@ -8,6 +8,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Akshar&family=Quicksand:wght@300&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
     </head>
     <body>
         <section class = "header">
@@ -24,16 +25,63 @@
                 </div>
                 <i class="fa fa-bars" onclick="showMenu()"></i>
             </nav>
-            <div class="text-box">
-                <h1>Important Features Detector</h1>
-            </div>         
+            <!-- ------- video ------- -->
+            <div class="container">
+                <div class="mySlides">
+                    <video autoplay muted loop id="myVideo">
+                        <source src="/static/images/forest.mp4" type="video/mp4">
+                        Your browser does not support HTML5 video.
+                    </video>
+                    <div class="content">
+                        <h1>Random Forest</h1>
+                        <p>Learn More</p>
+                        <button id="myBtn" onclick="myFunction()">Pause</button>
+                    </div>
+                    <div class="text-box">
+                        <h1>Random Forest Classifier</h1>
+                    </div> 
+                </div>
+                <div class="mySlides">
+                    <video autoplay muted loop id="myVideo">
+                        <source src="/static/images/word_cloud.mov" type="video/mp4">
+                        Your browser does not support HTML5 video.
+                    </video>
+                    <div class="content">
+                        <h1>Word Cloud</h1>
+                        <p>Learn More</p>
+                        <button id="myBtn" onclick="myFunction()">Pause</button>
+                    </div>
+                    <div class="text-box">
+                        <h1></h1>
+                    </div> 
+                </div>
+                <div class="mySlides">
+                    <video autoplay muted loop id="myVideo">
+                        <source src="/static/images/influence.mov" type="video/mp4">
+                        Your browser does not support HTML5 video.
+                    </video>
+                    <div class="content">
+                        <h1>Social Network Analysis</h1>
+                        <p>Learn More</p>
+                        <button id="myBtn" onclick="myFunction()">Pause</button>
+                    </div>
+                    <div class="text-box">
+                        <h1>Network Influencer Detector</h1>
+                    </div> 
+                </div>
+            </div>
+        <a class="prev" onclick="plusSlides(-1)">❮</a>
+        <a class="next" onclick="plusSlides(1)">❯</a>
+        <div class="caption-container">
+            <p id="caption"></p>
+        </div>
         </section>
         <!-- ------- project ------- -->
-        <section class="project">
+        <section>
             <form action = "http://localhost:5000/uploader" method = "POST" 
                 enctype = "multipart/form-data">
-                <input type = "file" name = "file" />
-                <button type = "submit" >Upload</button>
+                <input type = "file" multiple name = "file"/>
+                <button type = "submit" class="button-30" role="button">Upload</button>
                 {% if message %}
                 <div class="alert">
                     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
@@ -46,13 +94,7 @@
                 </div>
                 {% endif %}  
             </form>
-            <div class="drop-zone">
-                <span class="drop-zone__prompt">Drop file here or click to upload</span>
-                <input type="file" name="myFile" class="drop-zone__input">
-            </div>
-
-
-
+            <script src="/code/pass/dropdown.js"></script>
                 <!-- <a href="" class="hero-btn">Analyze</a> -->
             <form class="project" action="/result" method="POST">
                 {% if name %}
@@ -64,7 +106,6 @@
                 <input type="text" id="name" name="name">
                 <center><input class="hero-btn" type="Submit"></center>
             </form>
-          
         </section>
         <script>
             var navLinks = document.getElementById("navLinks");
@@ -74,6 +115,46 @@
             function hideMenu() {
                 navLinks.style.right = "-200px"
             }
+            var video = document.getElementById("myVideo");
+            var btn = document.getElementById("myBtn");
+
+            function myFunction() {
+            if (video.paused) {
+                video.play();
+                btn.innerHTML = "Pause";
+            } else {
+                video.pause();
+                btn.innerHTML = "Play";
+            }
+            }
+            let slideIndex = 1;
+            showSlides(slideIndex);
+
+            function plusSlides(n) {
+            showSlides(slideIndex += n);
+            }
+
+            function currentSlide(n) {
+            showSlides(slideIndex = n);
+            }
+
+            function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("demo");
+            let captionText = document.getElementById("caption");
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex-1].style.display = "block";
+            dots[slideIndex-1].className += " active";
+            captionText.innerHTML = dots[slideIndex-1].alt;
+            }  
         </script>
     </body>
 </html>
