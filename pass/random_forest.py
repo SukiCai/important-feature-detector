@@ -80,13 +80,6 @@ class RandomForest:
             )
         fig = go.Figure(data=data, layout=layout)
         plotly.offline.plot(fig,filename='code/output/feature_ranking.html',config={'displayModeBar': False})
-        # feature_imp.sort_values(inplace=True,ascending=False)
-        # sns.barplot(x=feature_imp, y=feature_imp.index)
-        # plt.xlabel('Feature Importance Score')
-        # plt.ylabel('Features')
-        # plt.title("Visualizing Important Features")
-        # plt.legend()
-        # plt.savefig('code/output/feature_ranking.png')
 
     def start(self):
     # 0. Data Cleanning
@@ -97,7 +90,6 @@ class RandomForest:
         self.clean_columns(self.data)
         self.clean_rows(self.data)
         self.buildRandomForest()
-        self.visualize()
 
     def buildRandomForest(self):
     # 1. Build the Classifier
@@ -112,7 +104,7 @@ class RandomForest:
         clf.fit(X_train,y_train)
         y_pred=clf.predict(X_test)
         # Model Accuracy
-        print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
+        # print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
     # 2. Finding Important Features
         feature_imp = pd.Series(clf.feature_importances_,index=data.columns.drop(self.label_column))
         feature_imp_sorted = feature_imp.sort_values(ascending=False)
@@ -130,17 +122,5 @@ class RandomForest:
                 self.columns_to_drop.append(column_to_drop)
                 # print(self.columns_to_drop)
             self.rebuild()
-        pd.DataFrame(self.columns_to_drop).to_csv("code/output/columns_dropped.csv",index=False,header=False)
-    # 4. Weight the indicator
-        self.reorder_columns(data)
-        for x in range(0, len(data.columns) - 1):
-            if (data.columns[x+1] == feature_imp.keys()[x]):
-                scalar = clf.feature_importances_[x]
-                data[data.columns[x+1]] = data[data.columns[x+1]].apply(lambda x: x*scalar)
-            else:
-                print("Wrong Order")
-        data['weighted_score'] = data.drop(self.label_column, axis=1).sum(axis=1)
-    # 5. Store weigted indicator
-        data = pd.concat((self.columns_to_recover,data),axis=1, join="inner")
-        data.to_csv(self.result_to_store,index=False,header=True)
+        # pd.DataFrame(self.columns_to_drop).to_csv("code/output/columns_dropped.csv",index=False,header=False)
         

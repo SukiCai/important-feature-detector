@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta name="viewport" content="with=device-width, initial-scale=1.0">
-        <title>SukiCai's Projects</title>
+        <title>SukiCai's Personal Website</title>
         <link rel="stylesheet" href="../static/project.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,47 +25,35 @@
                 <i class="fa fa-bars" onclick="showMenu()"></i>
             </nav>
             <div class="text-box">
-                <h1>Important Features Detector</h1>
-            </div>         
+                <h1>Worlds Cleverest Person</h1>
+                <p>WITHOUT DOUBT</p>
+                <a href="" class="hero-btn">Visit Us To Know More</a>
+            </div>
         </section>
         <!-- ------- project ------- -->
         <section class="project">
-            <form action = "http://localhost:5000/uploader" method = "POST" 
-                enctype = "multipart/form-data">
-                <input type = "file" name = "file" />
-                <button type = "submit" >Upload</button>
-                {% if message %}
-                <div class="alert">
-                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                    <strong>Failed!</strong> {{message}}
+            <h1> Projects </h1>
+            <p> Machine Learning Projects</p>
+            <div class = "row">
+                <div class="project-col">
+                    <h3>Important Features Detector</h3>
+                    <p>Ranking the features using Random Forest with auto-optimization</p>
                 </div>
-                {% else %}
-                <div class="alert success">
-                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                    <strong>Success!</strong> {{message}}
+                <div class="project-col">
+                    <h3>Network Influencer Finder</h3>
+                    <p>Detecting network influencer using Social Network Analysis</p>
                 </div>
-                {% endif %}  
-            </form>
-            <div class="drop-zone">
-                <span class="drop-zone__prompt">Drop file here or click to upload</span>
-                <input type="file" name="myFile" class="drop-zone__input">
+                <div class="project-col">
+                    <h3>Word Cloud Generator</h3>
+                    <p>Generating a fancy word cloud basing on the provided images and texts</p>
+                </div>
             </div>
-
-
-
-                <!-- <a href="" class="hero-btn">Analyze</a> -->
-            <form class="project" action="/result" method="POST">
-                {% if name %}
-                    <center>
-                    <h3 style="color: blue;" class="hero-btn">{{name}}</h3>
-                    </center> 
-                {% endif %}
-                <label for="name">Enter you target column name:</label>
-                <input type="text" id="name" name="name">
-                <center><input class="hero-btn" type="Submit"></center>
-            </form>
-          
         </section>
+        <!--------- Important Features Detector --------->
+        <!-- <section class = "detector">
+            <h1> Important Features Detector</h1>
+            <p> this is the introduction of the detector</p>
+        </section> -->
         <script>
             var navLinks = document.getElementById("navLinks");
             function showMenu() {
