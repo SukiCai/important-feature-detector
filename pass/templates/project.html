@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <head>
         <meta name="viewport" content="with=device-width, initial-scale=1.0">
         <title>SukiCai's Projects</title>
@@ -76,11 +77,14 @@
             <p id="caption"></p>
         </div>
         </section>
-        <!-- ------- project ------- -->
+        <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+        <embed width="100%" height="800px" src="/result">
+        <script>
+        // <!-- ------- project ------- -->
         <section>
             <form action = "http://localhost:5000/uploader" method = "POST" 
                 enctype = "multipart/form-data">
-                <input type = "file" multiple name = "file"/>
+                <input type = "file" id="csvFile" name = "file"/>
                 <button type = "submit" class="button-30" role="button">Upload</button>
                 {% if message %}
                 <div class="alert">
@@ -99,7 +103,7 @@
             <form class="project" action="/result" method="POST">
                 {% if name %}
                     <center>
-                    <h3 style="color: blue;" class="hero-btn">{{name}}</h3>
+                    <h3 style="color: blue;" class="hero-btn" id="rf">{{name}}</h3>
                     </center> 
                 {% endif %}
                 <label for="name">Enter you target column name:</label>
@@ -107,6 +111,11 @@
                 <center><input class="hero-btn" type="Submit"></center>
             </form>
         </section>
+        <form>
+            <input name="a" id="a">{{name}}<br>
+            <button onclick="drawChart()" id="piechart">Add</button>
+        </form>
+
         <script>
             var navLinks = document.getElementById("navLinks");
             function showMenu() {

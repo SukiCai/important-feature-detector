@@ -79,7 +79,7 @@ class RandomForest:
                 )
             )
         fig = go.Figure(data=data, layout=layout)
-        plotly.offline.plot(fig,filename='code/output/feature_ranking.html',config={'displayModeBar': False})
+        plotly.offline.plot(fig,filename='code/pass/templates/feature_ranking.html',config={'displayModeBar': False}, auto_open=False)
 
     def start(self):
     # 0. Data Cleanning

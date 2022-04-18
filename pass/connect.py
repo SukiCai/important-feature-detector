@@ -2,6 +2,7 @@ import random_forest
 import pandas as pd
 import time
 import os
+import csv
 from flask import Flask, render_template, url_for, request
 
 def clean():
@@ -55,10 +56,8 @@ def result():
     rf = random_forest.RandomForest("code/uploads/analyze_target.csv","code/output/result.csv", "blnIsThreatening",0.92,0.01,[])
     rf.start()
     rf.visualize()
-    output = pd.read_csv("code/output/features_ranking.csv").to_json(orient="index")
-    print(output)
-    name = output
-    return render_template('project.html', name = name)
+    name = "suki"
+    return render_template('feature_ranking.html', name = name)
 
 if __name__=="__main__":
     app.run(debug=True)
