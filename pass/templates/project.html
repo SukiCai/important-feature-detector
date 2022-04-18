@@ -5,14 +5,14 @@
         <meta name="viewport" content="with=device-width, initial-scale=1.0">
         <title>SukiCai's Projects</title>
         <link rel="stylesheet" href="../static/project.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Akshar&family=Quicksand:wght@300&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
     </head>
     <body>
         <section class = "header">
@@ -81,40 +81,282 @@
 
           <!-- ----------------------------------- project1 ------------------------------------------------- -->
         <section class = "project1" id="project1">
+          <div class="w3-content" style="max-width:1400px">
+              <!-- Header -->
+              <header class="w3-container w3-center w3-padding-32"> 
+                <h1><b>Random Forest Classifier</b></h1>
+                <p>Welcome to the project of <span class="w3-tag">Suki Cai</span></p>
+              </header>
 
-            <body class="w3-light-grey">
-
-                <!-- w3-content defines a container for fixed size centered content, 
-                and is wrapped around the whole page content, except for the footer in this example -->
-                <div class="w3-content" style="max-width:1400px">
-                
-                <!-- Header -->
-                <header class="w3-container w3-center w3-padding-32"> 
-                  <h1><b>Random Forest Classifier</b></h1>
-                  <p>Welcome to the project of <span class="w3-tag">Suki Cai</span></p>
-                </header>
-                
-                <!-- Grid -->
-                <!-- <div class="w3-row"> -->
-                
-                <!-- Blog entries -->
-                <div class="w3-col l8 s12">
-                  <!-- Blog entry -->
-                  <div class="w3-card-4 w3-margin w3-white">
-                    <img src="/static/images/rf.png" alt="Nature" style="width:100%">
-                    <div class="w3-container">
-                      <h3><b>Introduction</b></h3>
-                      <h5>Analyzing each feature weight to the classified target under an auto-optimize random forest algorithm.  <span class="w3-opacity">Machine Learning/Supervised Learning/Reinforcement Learning/Data Mining - Python</span></h5>
-                    </div>
-                
-                    <div class="w3-container">
-                      <p>Illustration of random forest. (a) In the training process, each decision tree is built based on a bootstrap sample of the training set, which contains two kinds of examples (green labels and red labels). (b) In the classification process, decision for the input instance is based on the majority voting results among all individual trees. (Machado et al., 2015) </p>
-                    </div><br>
+              <!-- Grid -->
+              <div class="w3-row">
+              
+              <!-- Blog entries -->
+              <div class="w3-col l8 s12">
+                <!-- Blog entry -->
+                <div class="w3-card-4 w3-margin w3-white">
+                  <img src="/static/images/rf.png" alt="Nature" style="width:100%">
+                  <div class="w3-container">
+                    <h3><b>Introduction</b></h3>
+                    <h5>Analyzing each feature weight to the classified target under an auto-optimize random forest algorithm. <span class="w3-opacity">Python</span></h5>
                   </div>
-                  <hr>
-                
+                  <div class="w3-container">
+                    <p>Illustration of random forest. (a) In the training process, each decision tree is built based on a bootstrap sample of the training set, which contains two kinds of examples (green labels and red labels). (b) In the classification process, decision for the input instance is based on the majority voting results among all individual trees. (Machado et al., 2015) . Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed
+                      tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+                  </div><hr>
+                </div>
+                <hr>
+
+                <!-- Blog entry -->
+                <div class="w3-card-4 w3-margin w3-white">
+                <!-- <img src="/w3images/bridge.jpg" alt="Norway" style="width:100%"> -->
+                  <embed width="100%" height="500px" src="/result">
+                  <div class="w3-container">
+                    <h3><b>Build Your Classifier</b></h3>
+                    <!-- <h5>Title description, <span class="w3-opacity">April 2, 2014</span></h5> -->
+                  </div>
+                  <div class="w3-container">
+                    <p>Please declare your target name and upload your csv file below</p>
+                  </div>
+                  <form action = "http://localhost:5000/uploader" method = "POST" enctype = "multipart/form-data">
+                    <label class="custom-file-upload">
+                        <input type = "file" id="csvFile" name = "file"/>
+                        <i class="fa fa-cloud-upload"></i> Select File
+                    </label>
+                    <button type = "submit" class="button-30" role="button">Upload</button>
+                    {% if message %}
+                    <div class="alert">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        <strong>Failed!</strong> {{message}}
+                    </div>
+                    {% else %}
+                    <div class="alert success">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        <strong>Success!</strong> {{message}}
+                    </div>
+                    {% endif %}  
+                  </form><br>
+                  <form class="grid" action="/result" method="POST">
+                    {% if name %}
+                      <center>
+                        <h3 style="color: blue;" class="let_space">Your Target is: {{name}}</h3>
+                      </center> 
+                    {% endif %} 
+                    <label for="name">Enter your name:</label>
+                    <input type="text" id="name" name="name">
+                    <label for="accuracy">Enter your target accuracy:</label>
+                    <input type="text" id="accuracy" name="accuracy">
+                    <center><input class="file_submit" type="Submit"></center>
+                  </form>
+                  
+                <!-- <form class="project" action="/result" method="POST">
+                  {% if name %}
+                      <center>
+                      <h3 style="color: blue;" class="hero-btn" id="rf">{{name}}</h3>
+                      </center> 
+                  {% endif %}
+                  <label for="name">Enter you target column name:</label>
+                  <input type="text" id="name" name="name">
+                  <center><input class="hero-btn" type="Submit"></center>
+                </form> -->
+                </div>
+              <!-- END BLOG ENTRIES -->
+              </div>
+              
+              <!-- Introduction menu -->
+              <div class="w3-col l4">  
+                                <!-- Benefits & Challenges -->
+                <div class="w3-card w3-margin w3-margin-top">
+                  <img src="/static/images/hr.png" style="width:100%; filter:grayscale(0.55)">
+                    <div class="w3-container w3-white">
+                      <h4><b>Real Life Analogy</b></h4>
+                      <p>A HR want to find the best candidate -> He collected info about both the current employees and the unqualified interviewee -> He ranked the people according to their performance -> He imported the cleaned up file containing the data above -> According to the built up model, the HR can put in the candidate info and then get the "performance" prediction</p><br>
+                    </div>
+                  </div><hr>
+                <!-- Application -->
+                <div class="w3-card w3-margin">
+                  <div class="w3-container w3-padding">
+                    <h4>Application</h4>
+                  </div>
+                  <ul class="w3-ul w3-hoverable w3-white">
+                    <li class="w3-padding-16 flip-card">
+                      <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                          <img src="/static/images/banking.png" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+                            <span class="w3-large">Banking</span><br>
+                            <span>Granting of banking facilities</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <span>• Credit Card Fraud Detection</span><br>
+                            <span>• Customer Segmentation</span><br>
+                            <span>• Predicting Loan Defaults</span><br>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="w3-padding-16 flip-card">
+                      <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                          <img src="/static/images/medicine.png" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+                          <span class="w3-large">Medicine</span><br>
+                          <span>Recognize the great mix in the medicines</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <span>• Cardiovascular Disease Prediction</span><br>
+                            <span>• Diabetes Prediction</span><br>
+                            <span>• Breast Cancer Prediction</span><br>
+                        </div>
+                      </div>
+                    </li> 
+                    <li class="w3-padding-16 flip-card">
+                      <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                          <img src="/static/images/stock.png" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+                          <span class="w3-large">Stock Market</span><br>
+                          <span>Analyze the behavior of the stock market</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <span>• Stock Market Prediction</span><br>
+                            <span>• Stock Market Sentiment Analysis</span><br>
+                            <span>• Bitcoin Price Detection</span><br>
+                        </div>
+                      </div>
+                    </li> 
+                    <li class="w3-padding-16 flip-card">
+                      <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                          <img src="/static/images/shopify.png" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+                          <span class="w3-large">E-commerce</span><br>
+                          <span>Recommend or suggest to consumers</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <span>• Product Recommendation</span><br>
+                            <span>• Price Optimization</span><br>
+                            <span>• Search Ranking</span><br>
+                        </div>
+                      </div>
+                    </li> 
+                  </ul>
+                </div>
+                <hr>
+                <!-- <form action="yufeicaimail@gmail.com"
+                  method="POST"
+                  enctype="multipart/form-data"
+                  name="EmailForm">
+                      Name:<br>
+                      <input type="text" size="19" name="Contact-Name"><br><br>
+                      Email:<br>
+                      <input type="email" name="Contact-Email"><br><br> 
+                      Message:<br> 
+                      <textarea name="Contact-Message" rows="6″ cols="20″>
+                      </textarea><br><br> 
+                      <button type="submit" value="Submit">Send</button>
+                </form>  -->
+                <link href="static/contact-form.css" rel="stylesheet">
+
+<div class="fcf-body">
+
+    <div id="fcf-form">
+    <h3 class="fcf-h3">Contact us</h3>
+
+    <form id="fcf-form-id" class="fcf-form-class" method="post" action="/ask">
+        
+        <div class="fcf-form-group">
+            <label for="Name" class="fcf-label">Your name</label>
+            <div class="fcf-input-group">
+                <input type="text" id="Name" name="Name" class="fcf-form-control" required>
+            </div>
+        </div>
+
+        <div class="fcf-form-group">
+            <label for="Email" class="fcf-label">Your email address</label>
+            <div class="fcf-input-group">
+                <input type="email" id="Email" name="Email" class="fcf-form-control" required>
+            </div>
+        </div>
+
+        <div class="fcf-form-group">
+            <label for="Message" class="fcf-label">Your message</label>
+            <div class="fcf-input-group">
+                <textarea id="Message" name="Message" class="fcf-form-control" rows="6" maxlength="3000" required></textarea>
+            </div>
+        </div>
+
+        <div class="fcf-form-group">
+            <button type="submit" id="fcf-button" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block">Send Message</button>
+        </div>
+
+        <div class="fcf-credit" id="fcf-credit">
+        Simple HTML email form provided by <a href="https://www.majesticform.com" target="_blank">MajesticForm</a>
+        </div>
+
+    </form>
+    </div>
+
+</div>
 
 
+
+
+
+
+
+
+
+
+<!-- 
+
+                <div class="w3-card w3-margin containerm">
+                  <div class="w3-container w3-padding">
+                    <h4>Send Questions</h4>
+                  </div>
+                  <form action="/action_page.php">
+                    <label for="fname">First Name</label>
+                    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+                    <label for="lname">Last Name</label>
+                    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+
+                    <label for="country">Country</label>
+                    <select id="country" name="country">
+                      <option value="australia">Australia</option>
+                      <option value="canada">Canada</option>
+                      <option value="usa">USA</option>
+                    </select>
+
+                    <label for="subject">Subject</label>
+                    <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+
+                    <input type="submit" value="Submit">
+                  </form>
+                </div>
+               -->
+                <!-- Labels / tags -->
+                <div class="w3-card w3-margin">
+                  <div class="w3-container w3-padding">
+                    <h4>Tags</h4>
+                  </div>
+                  <div class="w3-container w3-white">
+                  <br>
+                  <p><span class="w3-tag w3-black w3-margin-bottom">Machine Learning</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Data Mining</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Supervised Learning</span>
+                    <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Anomaly Detection</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Dimensionality Reduction</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Structured Prediction</span>
+                    <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Reinforcement Learning</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Artificial Neural Network</span>
+                  </p>
+                  </div>
+                </div>
+
+
+                </div>
+              <!-- END Introduction Menu -->
+              </div>
+              <!-- END GRID -->
+              </div><br>
+              <!-- END w3-content -->
+              </div>
+              <!-- Footer -->
+              <footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+                <button class="w3-button w3-black w3-disabled w3-padding-large w3-margin-bottom">Previous</button>
+                <button class="w3-button w3-black w3-padding-large w3-margin-bottom">Next »</button>
+              </footer>
 
 
             <script>
@@ -131,54 +373,10 @@
                   document.getElementById(pageName).style.display = "block";
                   elmnt.style.backgroundColor = color;
                 }
-                
             // Get the element with id="defaultOpen" and click on it
             document.getElementById("defaultOpen").click();
             </script>
-                   
-
-
-
-<!-- 
-
-
-            <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
-            <form action = "http://localhost:5000/uploader" method = "POST" 
-                enctype = "multipart/form-data">
-                <label class="custom-file-upload">
-                    <input type = "file" id="csvFile" name = "file"/>
-                    <i class="fa fa-cloud-upload"></i> Select File
-                </label>
-                <button type = "submit" class="button-30" role="button">Upload</button>
-                {% if message %}
-                <div class="alert">
-                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                    <strong>Failed!</strong> {{message}}
-                </div>
-                {% else %}
-                <div class="alert success">
-                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                    <strong>Success!</strong> {{message}}
-                </div>
-                {% endif %}  
-            </form>
-            <script src="/code/pass/dropdown.js"></script>
-            <form class="project" action="/result" method="POST">
-                {% if name %}
-                    <center>
-                    <h3 style="color: blue;" class="hero-btn" id="rf">{{name}}</h3>
-                    </center> 
-                {% endif %}
-                <label for="name">Enter you target column name:</label>
-                <input type="text" id="name" name="name">
-                <center><input class="hero-btn" type="Submit"></center>
-            </form>
-        
-        <embed width="100%" height="800px" src="/result">
-        <form>
-            <input name="a" id="a">{{name}}<br>
-            <button onclick="drawChart()" id="piechart">Add</button>
-        </form> -->
+                  
     </section>
 
 

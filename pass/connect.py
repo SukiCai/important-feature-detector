@@ -4,6 +4,7 @@ import time
 import os
 import csv
 from flask import Flask, render_template, url_for, request
+import subprocess
 
 def clean():
     columns_dropped = open("code/output/columns_dropped.csv", "w+")
@@ -50,14 +51,23 @@ def upload_file():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     return render_template('project.html')
 
+
+@app.route('/ask', methods=['POST'])
+def ask():
+    result = subprocess.run(['php', '/static/contact-form-process.php'], stdout=subprocess.PIPE, check=True)
+    return render_template('project.html')
+
+
 @app.route('/result',methods=['POST', 'GET'])
 def result():
+    output = request.form.to_dict()
+    name = output['name']
+    accuracy = float(output['accuracy'])
     clean() 
-    rf = random_forest.RandomForest("code/uploads/analyze_target.csv","code/output/result.csv", "blnIsThreatening",0.92,0.01,[])
+    rf = random_forest.RandomForest("code/uploads/analyze_target.csv","code/output/result.csv", name, accuracy,0.01,[])
     rf.start()
     rf.visualize()
-    name = "suki"
-    return render_template('feature_ranking.html', name = name)
+    return render_template('feature_ranking.html')
 
 if __name__=="__main__":
     app.run(debug=True)
