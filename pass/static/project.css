@@ -3,15 +3,111 @@
     padding: 0;
     font-family: 'Akshar', sans-serif;
     font-family: 'Quicksand', sans-serif;
+    box-sizing: border-box
 }
 
-/* ------- Home -------- */
+
+.header {
+  min-height: 100vh;
+  width: 100%;
+  background-image: linear-gradient(rgba(26,37,56,255),rgba(26,37,56,255)), url(images/test.jpeg);
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+
 body {
-    margin: 0;
-    font-family: Arial;
-    font-size: 17px;
+  margin: 0;
+  font-family: Arial;
+  font-size: 17px;
+}
+
+
+
+input[type="file"] {
+  display: none;
+}
+
+/* ------ Button ------- */
+.btn:link,
+.btn:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 15px 40px;
+  display: inline-block;
+  border-radius: 100px;
+  transition: all .2s;
+  position: relative;
+}
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+.btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+.btn-white {
+  background-color: #fff;
+  color: #777;
+}
+.btn::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all .4s;
+}
+.btn-white::after {
+  background-color: #fff;
+}
+.btn:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+.btn-animated {
+  animation: moveInBottom 5s ease-out;
+  animation-fill-mode: backwards;
+}
+
+@keyframes moveInBottom {
+  0% {
+      opacity: 0;
+      transform: translateY(30px);
   }
-  
+
+  100% {
+      opacity: 1;
+      transform: translateY(0px);
+  }
+}
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.topleft {
+  position: absolute;
+  top: 20px;
+  left: 16px;
+  font-size: 18px;
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+
+
+/* ------- Video Gallary -------- */
   #myVideo {
     right: 0;
     bottom: 0;
@@ -19,7 +115,15 @@ body {
     height: 600px;
     object-fit: cover;
   }
-  
+  #myFilteredVideo {
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+    filter: contrast(0.5);
+    transform: scale(1.04);
+  }
   .content {
     position: relative;
     bottom: 0;
@@ -29,7 +133,6 @@ body {
     height: 100%;
     /* padding: 20px; */
   }
-  
   #myBtn {
     width: 200px;
     font-size: 18px;
@@ -39,7 +142,6 @@ body {
     color: #fff;
     cursor: pointer;
   }
-  
   #myBtn:hover {
     background: #ddd;
     color: black;
@@ -70,7 +172,7 @@ body {
   .next {
     cursor: pointer;
     position: absolute;
-    top: 40%;
+    top: 50%;
     width: auto;
     padding: 16px;
     margin-top: -50px;
@@ -81,32 +183,20 @@ body {
     user-select: none;
     -webkit-user-select: none;
   }
-  
   /* Position the "next button" to the right */
   .next {
     right: 0;
     border-radius: 3px 0 0 3px;
   }
-  
   /* On hover, add a black background color with a little bit see-through */
   .prev:hover,
   .next:hover {
     background-color: rgba(0, 0, 0, 0.8);
   }
   
-  /* Number text (1/3 etc) */
-  .numbertext {
-    color: #f2f2f2;
-    font-size: 12px;
-    padding: 8px 12px;
-    position: absolute;
-    top: 0;
-  }
-  
   /* Container for image text */
   .caption-container {
     text-align: center;
-    background-color: #222;
     padding: 2px 16px;
     color: white;
   }
@@ -133,7 +223,7 @@ body {
     opacity: 1;
   }
 
-  /* The dots/bullets/indicators */
+/* ---- Dot Bar ---- */
 .dot {
   cursor: pointer;
   height: 15px;
@@ -144,20 +234,11 @@ body {
   display: inline-block;
   transition: background-color 0.6s ease;
 }
-
 .active, .dot:hover {
   background-color: #717171;
 }
 
-.header {
-    min-height: 100vh;
-    width: 100%;
-    background-image: linear-gradient(rgba(26,37,56,255),rgba(26,37,56,255)), url(images/test.jpeg);
-    background-position: center;
-    background-size: cover;
-    position: relative;
-}
-
+/* ---- Nav Bar ---- */
 nav{
     display: flex;
     padding: 2% 6%;
@@ -167,25 +248,21 @@ nav{
 nav img {
     width: 150;
 }
-
 .nav-links {
     flex: 1;
     text-align: right;
 }
-
 .nav-links ul li{
     list-style: none;
     display: inline-block;
     padding: 8px 12px;
     position: relative;
 }
-
 .nav-links ul li a{
     color: #fff;
     text-decoration: none;
     font-size: 13px;
 }
-
 .nav-links ul li::after{
     content: '';
     width:  0%;
@@ -195,11 +272,11 @@ nav img {
     margin: auto;
     transition:0.5s
 }
-
 .nav-links ul li:hover::after{
     width: 100%;
 }
 
+/* ---- Text Box ---- */
 .text-box {
     width: 90%;
     color: #fff;
@@ -209,17 +286,16 @@ nav img {
     transform: translate(-50%,-50%);
     text-align: center;
 }
-
 .text-box h1{
     font-size: 62px;
 }
-
 .text-box p{
     margin: 10px 0 40px;
     font-size: 14px;
     color: #fff;
 }
 
+/* ---- Hero Button ---- */
 .hero-btn {
     display: inline-block;
     text-decoration: none;
@@ -231,7 +307,6 @@ nav img {
     position: relative;
     cursor: pointer;
 }
-
 .hero-btn:hover{
     border: 1px solid #f44336;
     background: #f44336;
@@ -280,25 +355,6 @@ nav .fa{
     padding-top: 100px;
 }
 
-h1 {
-    font-size: 36px;
-    font-weight: 600;
-}
-
-h3 {
-    text-align: center;
-    font-weight: 600;
-    margin: 10px 0;
-}
-
-p {
-    color: #777;
-    font-size: 14px;
-    font-weight: 300;
-    line-height: 22px;
-    padding: 10px;
-}
-
 .row {
     margin-top: 5%;
     display: flex;
@@ -324,9 +380,67 @@ p {
         flex-direction: column;
     }
 }
+/**** --------------------------- Project1 ---------------------- ****/
+
+#project1{
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  padding-top: 0px;
+}
+
+/* ------- Tab Header ------- */
+/* Style tab links */
+.tablink {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 25%;
+}
+
+.tablink:hover {
+  background-color: #777;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+  color: white;
+  display: none;
+  padding: 100px 20px;
+  height: 100%;
+}
+
+#Introduction {background-color: red;}
+#News {background-color: green;}
+#Contact {background-color: blue;}
+#About {background-color: orange;}
 
 
-/* ---- project ---- */
+/* ---- Project2 ---- */
+
+#project2{
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  padding-top: 100px;
+}
+
+
+/* ---- Project3 ---- */
+
+#project3{
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  padding-top: 100px;
+}
+
+/* ---- Alert ---- */
 .alert {
   padding: 20px;
   background-color: #f44336;
@@ -335,11 +449,9 @@ p {
   transition: opacity 0.6s;
   margin-bottom: 15px;
 }
-
 .alert.success {background-color: #04AA6D;}
 .alert.info {background-color: #2196F3;}
 .alert.warning {background-color: #ff9800;}
-
 .closebtn {
   margin-left: 15px;
   color: white;
@@ -350,7 +462,6 @@ p {
   cursor: pointer;
   transition: 0.3s;
 }
-
 .closebtn:hover {
   color: black;
 }

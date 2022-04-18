@@ -48,59 +48,12 @@
                     <p>Generating a fancy word cloud basing on the provided images and texts</p>
                 </div>
             </div>
-             <!-- ------- video ------- -->
-             <div class="container">
-                <div class="mySlides">
-                    <video autoplay muted loop id="myVideo">
-                        <source src="/static/images/forest.mp4" type="video/mp4">
-                        Your browser does not support HTML5 video.
-                    </video>
-                    <div class="content">
-                        <h1>Random Forest</h1>
-                        <p>Learn More</p>
-                        <button id="myBtn" onclick="myFunction()">Pause</button>
-                    </div>
-                </div>
-                <div class="mySlides">
-                    <video autoplay muted loop id="myVideo">
-                        <source src="/static/images/wordcloud.mov" type="video/mp4">
-                        Your browser does not support HTML5 video.
-                    </video>
-                    <div class="content">
-                        <h1>Word Cloud</h1>
-                        <p>Learn More</p>
-                        <button id="myBtn" onclick="myFunction()">Pause</button>
-                    </div>
-                </div>
-                <div class="mySlides">
-                    <video autoplay muted loop id="myVideo">
-                        <source src="/static/images/wordcloud.mov" type="video/mp4">
-                        Your browser does not support HTML5 video.
-                    </video>
-                    <div class="content">
-                        <h1>Social Network Analysis</h1>
-                        <p>Learn More</p>
-                        <button id="myBtn" onclick="myFunction()">Pause</button>
-                    </div>
-                </div>
-                <a class="prev" onclick="plusSlides(-1)">❮</a>
-                <a class="next" onclick="plusSlides(1)">❯</a>
-            </div>
-            <!-- The dots/circles -->
-        <div style="text-align:center">
-            <span class="dot" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-            <span class="dot" onclick="currentSlide(3)"></span>
-        </div>
+            
+
         <div class="caption-container">
             <p id="caption"></p>
         </div>
         </section>
-        <!--------- Important Features Detector --------->
-        <!-- <section class = "detector">
-            <h1> Important Features Detector</h1>
-            <p> this is the introduction of the detector</p>
-        </section> -->
         <script>
             var navLinks = document.getElementById("navLinks");
             function showMenu() {
@@ -109,46 +62,6 @@
             function hideMenu() {
                 navLinks.style.right = "-200px"
             }
-            var video = document.getElementById("myVideo");
-            var btn = document.getElementById("myBtn");
-
-            function myFunction() {
-            if (video.paused) {
-                video.play();
-                btn.innerHTML = "Pause";
-            } else {
-                video.pause();
-                btn.innerHTML = "Play";
-            }
-            }
-            let slideIndex = 1;
-            showSlides(slideIndex);
-
-            function plusSlides(n) {
-            showSlides(slideIndex += n);
-            }
-
-            function currentSlide(n) {
-            showSlides(slideIndex = n);
-            }
-
-            function showSlides(n) {
-            let i;
-            let slides = document.getElementsByClassName("mySlides");
-            let dots = document.getElementsByClassName("demo");
-            let captionText = document.getElementById("caption");
-            if (n > slides.length) {slideIndex = 1}
-            if (n < 1) {slideIndex = slides.length}
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" active", "");
-            }
-            slides[slideIndex-1].style.display = "block";
-            dots[slideIndex-1].className += " active";
-            captionText.innerHTML = dots[slideIndex-1].alt;
-            }  
         </script>
     </body>
 </html>

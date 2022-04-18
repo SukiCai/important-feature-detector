@@ -9,7 +9,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import plotly
 import plotly.graph_objs as go
-from pandas import *
 from sklearn import metrics
 from collections import Counter
 from pandas.api.types import is_string_dtype

@@ -10,11 +10,14 @@
         <link href="https://fonts.googleapis.com/css2?family=Akshar&family=Quicksand:wght@300&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     </head>
     <body>
         <section class = "header">
             <nav>
-                <a href="/"><img src="/static/images/logo.png" width="150" height="50"></a>
+                <a href="/"><img src="/static/images/logo.png" width="150" height="50" class="topleft"></a>
                 <div class="nav-links" id="navLinks">
                     <i class="fa fa-times" onclick="hideMenu()"></i>
                     <ul>
@@ -28,63 +31,124 @@
             </nav>
             <!-- ------- video ------- -->
             <div class="container">
+                <!-- ------------  -->
                 <div class="mySlides">
                     <video autoplay muted loop id="myVideo">
                         <source src="/static/images/forest.mp4" type="video/mp4">
-                        Your browser does not support HTML5 video.
                     </video>
-                    <div class="content">
-                        <h1>Random Forest</h1>
-                        <p>Learn More</p>
-                        <button id="myBtn" onclick="myFunction()">Pause</button>
-                    </div>
                     <div class="text-box">
-                        <h1>Random Forest Classifier</h1>
+                        <h1>Random Forest Classifier</h1></br>
+                        <a href="#project1" class="btn btn-white btn-animate">Learn More</a>
                     </div> 
                 </div>
-                <div class="mySlides">
-                    <video autoplay muted loop id="myVideo">
-                        <source src="/static/images/word_cloud.mov" type="video/mp4">
-                        Your browser does not support HTML5 video.
-                    </video>
-                    <div class="content">
-                        <h1>Word Cloud</h1>
-                        <p>Learn More</p>
-                        <button id="myBtn" onclick="myFunction()">Pause</button>
-                    </div>
-                    <div class="text-box">
-                        <h1></h1>
-                    </div> 
-                </div>
+                <!-- ------------  -->
                 <div class="mySlides">
                     <video autoplay muted loop id="myVideo">
                         <source src="/static/images/influence.mov" type="video/mp4">
-                        Your browser does not support HTML5 video.
                     </video>
-                    <div class="content">
-                        <h1>Social Network Analysis</h1>
-                        <p>Learn More</p>
-                        <button id="myBtn" onclick="myFunction()">Pause</button>
-                    </div>
                     <div class="text-box">
-                        <h1>Network Influencer Detector</h1>
+                        <h1>Network Influencer Detector</h1></br>
+                        <a href="#project2" class="btn btn-white btn-animate">Learn More</a>
                     </div> 
                 </div>
+                <!-- ------------  -->
+                <div class="mySlides">
+                    <video autoplay muted loop id="myFilteredVideo">
+                        <source src="/static/images/word_cloud.mov" type="video/mp4">
+
+                    </video>
+                    <div class="text-box">
+                        <h1 style="color: white;">Word Cloud Generator</h1></br>
+                        <a href="#project3" class="btn btn-white btn-animate">Learn More</a>
+                    </div> 
+                </div>
+
             </div>
         <a class="prev" onclick="plusSlides(-1)">❮</a>
         <a class="next" onclick="plusSlides(1)">❯</a>
         <div class="caption-container">
             <p id="caption"></p>
+        </div><br>
+        <!-- The dots/circles -->
+        <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
         </div>
         </section>
-        <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
-        <embed width="100%" height="800px" src="/result">
-        <script>
-        // <!-- ------- project ------- -->
-        <section>
+
+
+
+          <!-- ----------------------------------- project1 ------------------------------------------------- -->
+        <section class = "project1" id="project1">
+
+            <body class="w3-light-grey">
+
+                <!-- w3-content defines a container for fixed size centered content, 
+                and is wrapped around the whole page content, except for the footer in this example -->
+                <div class="w3-content" style="max-width:1400px">
+                
+                <!-- Header -->
+                <header class="w3-container w3-center w3-padding-32"> 
+                  <h1><b>Random Forest Classifier</b></h1>
+                  <p>Welcome to the project of <span class="w3-tag">Suki Cai</span></p>
+                </header>
+                
+                <!-- Grid -->
+                <!-- <div class="w3-row"> -->
+                
+                <!-- Blog entries -->
+                <div class="w3-col l8 s12">
+                  <!-- Blog entry -->
+                  <div class="w3-card-4 w3-margin w3-white">
+                    <img src="/static/images/rf.png" alt="Nature" style="width:100%">
+                    <div class="w3-container">
+                      <h3><b>Introduction</b></h3>
+                      <h5>Analyzing each feature weight to the classified target under an auto-optimize random forest algorithm.  <span class="w3-opacity">Machine Learning/Supervised Learning/Reinforcement Learning/Data Mining - Python</span></h5>
+                    </div>
+                
+                    <div class="w3-container">
+                      <p>Illustration of random forest. (a) In the training process, each decision tree is built based on a bootstrap sample of the training set, which contains two kinds of examples (green labels and red labels). (b) In the classification process, decision for the input instance is based on the majority voting results among all individual trees. (Machado et al., 2015) </p>
+                    </div><br>
+                  </div>
+                  <hr>
+                
+
+
+
+
+            <script>
+                function openPage(pageName,elmnt,color) {
+                  var i, tabcontent, tablinks;
+                  tabcontent = document.getElementsByClassName("tabcontent");
+                  for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                  }
+                  tablinks = document.getElementsByClassName("tablink");
+                  for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].style.backgroundColor = "";
+                  }
+                  document.getElementById(pageName).style.display = "block";
+                  elmnt.style.backgroundColor = color;
+                }
+                
+            // Get the element with id="defaultOpen" and click on it
+            document.getElementById("defaultOpen").click();
+            </script>
+                   
+
+
+
+<!-- 
+
+
+            <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
             <form action = "http://localhost:5000/uploader" method = "POST" 
                 enctype = "multipart/form-data">
-                <input type = "file" id="csvFile" name = "file"/>
+                <label class="custom-file-upload">
+                    <input type = "file" id="csvFile" name = "file"/>
+                    <i class="fa fa-cloud-upload"></i> Select File
+                </label>
                 <button type = "submit" class="button-30" role="button">Upload</button>
                 {% if message %}
                 <div class="alert">
@@ -99,7 +163,6 @@
                 {% endif %}  
             </form>
             <script src="/code/pass/dropdown.js"></script>
-                <!-- <a href="" class="hero-btn">Analyze</a> -->
             <form class="project" action="/result" method="POST">
                 {% if name %}
                     <center>
@@ -110,11 +173,28 @@
                 <input type="text" id="name" name="name">
                 <center><input class="hero-btn" type="Submit"></center>
             </form>
-        </section>
+        
+        <embed width="100%" height="800px" src="/result">
         <form>
             <input name="a" id="a">{{name}}<br>
             <button onclick="drawChart()" id="piechart">Add</button>
-        </form>
+        </form> -->
+    </section>
+
+
+
+
+
+
+
+
+
+        <section class = "project2" id="project2">
+        </section>
+
+        <section class = "project3" id="project3">
+        </section>
+
 
         <script>
             var navLinks = document.getElementById("navLinks");
@@ -138,15 +218,12 @@
             }
             let slideIndex = 1;
             showSlides(slideIndex);
-
             function plusSlides(n) {
             showSlides(slideIndex += n);
             }
-
             function currentSlide(n) {
             showSlides(slideIndex = n);
             }
-
             function showSlides(n) {
             let i;
             let slides = document.getElementsByClassName("mySlides");
