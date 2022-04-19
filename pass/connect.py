@@ -65,11 +65,11 @@ def ask():
 
 @app.route('/result',methods=['POST', 'GET'])
 def result():
-    output = request.form.to_dict()
-    name = output['name']
-    accuracy = float(output['accuracy'])
+    # output = request.form.to_dict()
+    # name = output['name']
+    # accuracy = float(output['accuracy'])
     clean() 
-    rf = random_forest.RandomForest("code/uploads/analyze_target.csv","code/output/result.csv", name, accuracy,0.01,[])
+    rf = random_forest.RandomForest("code/uploads/analyze_target.csv","code/output/result.csv", 'blnIsThreatening', 0.92,0.01,[])
     rf.start()
     rf.visualize()
     return render_template('feature_ranking.html')
