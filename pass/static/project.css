@@ -98,7 +98,7 @@ input[type="file"] {
   border-radius: 25px;
   display: inline-block;
   padding: 6px 12px;
-  width: 90%;
+  width: 95%;
   height: 200px;
   cursor: pointer;
   text-align: center;
@@ -110,11 +110,9 @@ input[type="file"] {
   left: 16px;
   font-size: 18px;
 }
-
 html {
   scroll-behavior: smooth;
 }
-
 
 
 
@@ -400,6 +398,46 @@ nav .fa{
   padding-top: 0px;
 }
 
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1;
+  padding-top: 100px; /* Location of the box */
+  left: 10%;
+  top: 10%;
+  align-items: center;
+  width: 80%; /* Full width */
+  height: 80%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 /* ------- Tab Header ------- */
 /* Style tab links */
 .tablink {
@@ -625,8 +663,18 @@ label.fcf-label {
   margin-top: 0.5rem;
 }
 input[type="submit"].fcf-btn-block, input[type="reset"].fcf-btn-block, input[type="button"].fcf-btn-block {
-  width: 100%;
+  width: 95%;
 }
+input[type=text], select {
+  width: 90%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
 
 /* ---- Project2 ---- */
 

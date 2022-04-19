@@ -109,18 +109,30 @@
 
                 <!-- Blog entry -->
                 <div class="w3-card-4 w3-margin w3-white">
-                <!-- <img src="/w3images/bridge.jpg" alt="Norway" style="width:100%"> -->
-                  <embed width="100%" height="500px" src="/result">
+                  <br>
                     <div class="w3-container">
                       <h3><b>Build Your Own Classifier</b></h3>
-                      <!-- <h5>Title description, <span class="w3-opacity">April 2, 2014</span></h5> -->
+                      <!-- <h5>Please upload your CSV file and custom the target below, <span class="w3-opacity">April 2, 2014</span></h5> -->
                     </div>
+                    
+
 
                   <div class="float-parent-element w3-container" style="width: 100%;">
-                    <div class="float-child-element">
+                    <div class="float-child-element" style="width: 100%;">
                       <div class="w3-container">
-                        <p>Please upload your CSV file below</p><br>
+                        <p>Please upload your CSV file and custom the target below</p><br>
                       </div>
+                      <!-- The Modal -->
+                      <button id="myBtn" style="width: 10%; font-size: 10px; border-radius: 5px;">Instructions</button>
+                      <div id="myModal" class="modal">
+                        <div class="modal-content">
+                          <span class="close">&times;</span>
+                          <h1>Sample CSV File</h1>
+                          <img id="myImg" src="/static/images/sampleT.png" style="width:500px">
+                        </div>
+                      </div><br><br>
+
+
                       <form action = "http://localhost:5000/uploader" method = "POST" enctype = "multipart/form-data">
                         <label class="custom-file-upload">
                             <input type = "file" id="csvFile" name = "file"/>
@@ -129,7 +141,7 @@
                             <h4 style="color: grey;">Click to Select File</h4>
                         </label><br>
                         <br>
-                        <button type="submit" id="fcf-button" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block">Upload</button>
+                        <button type="submit" id="fcf-button" class="fcf-btn fcf-btn-primary fcf-btn-lg" style="width: 95%;">Upload</button>
                         {% if message %}
                         <div class="alert">
                             <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
@@ -143,9 +155,38 @@
                         {% endif %}  
                       </form><br>
                     </div>
-                    <div class="float-child-element">
-                    <img src="/static/images/sampleT.png" style="width: 90%; height: 300px;">
-                    </div>
+
+
+
+
+                     <script>
+                      // Get the modal
+                      var modal = document.getElementById("myModal");
+                      
+                      // Get the button that opens the modal
+                      var btn = document.getElementById("myBtn");
+                      
+                      // Get the <span> element that closes the modal
+                      var span = document.getElementsByClassName("close")[0];
+                      
+                      // When the user clicks the button, open the modal 
+                      btn.onclick = function() {
+                        modal.style.display = "block";
+                      }
+                      
+                      // When the user clicks on <span> (x), close the modal
+                      span.onclick = function() {
+                        modal.style.display = "none";
+                      }
+                      
+                      // When the user clicks anywhere outside of the modal, close it
+                      window.onclick = function(event) {
+                        if (event.target == modal) {
+                          modal.style.display = "none";
+                        }
+                      }
+                      </script>
+                    <!-- -------- Custom Target ---------- -->
                     <div class="float-child-element" style="width: 100%;">
                       <form class="grid" action="/result" method="POST">
                         {% if name %}
@@ -153,15 +194,15 @@
                             <h3 style="color: blue;" class="let_space">Your Target is: {{name}}</h3>
                           </center> 
                         {% endif %} 
-                        <label for="name">Enter your target name:</label>
+                        <label for="name">Target name:</label>
                         <input type="text" id="name" name="name"><br><br>
-                        <label for="accuracy">Enter your target accuracy:</label>
+                        <label for="accuracy">Target accuracy:</label>
                         <input type="text" id="accuracy" name="accuracy"><br>
                         <br>
-                        <center><input class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block" type="Submit"></center>
+                        <center><input class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block" type="Submit"></center><br><br>
                       </form>
-                </div>
-
+                    </div>
+                    <embed width="100%" height="500px" src="/result"><br>
                 </div>
                 <!-- <form class="project" action="/result" method="POST">
                   {% if name %}
@@ -334,8 +375,6 @@
             </script>
                   
     </section>
-
-
 
 
 
