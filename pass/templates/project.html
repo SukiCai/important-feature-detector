@@ -111,44 +111,58 @@
                 <div class="w3-card-4 w3-margin w3-white">
                 <!-- <img src="/w3images/bridge.jpg" alt="Norway" style="width:100%"> -->
                   <embed width="100%" height="500px" src="/result">
-                  <div class="w3-container">
-                    <h3><b>Build Your Classifier</b></h3>
-                    <!-- <h5>Title description, <span class="w3-opacity">April 2, 2014</span></h5> -->
-                  </div>
-                  <div class="w3-container">
-                    <p>Please declare your target name and upload your csv file below</p>
-                  </div>
-                  <form action = "http://localhost:5000/uploader" method = "POST" enctype = "multipart/form-data">
-                    <label class="custom-file-upload">
-                        <input type = "file" id="csvFile" name = "file"/>
-                        <i class="fa fa-cloud-upload"></i> Select File
-                    </label>
-                    <button type = "submit" class="button-30" role="button">Upload</button>
-                    {% if message %}
-                    <div class="alert">
-                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                        <strong>Failed!</strong> {{message}}
+                    <div class="w3-container">
+                      <h3><b>Build Your Own Classifier</b></h3>
+                      <!-- <h5>Title description, <span class="w3-opacity">April 2, 2014</span></h5> -->
                     </div>
-                    {% else %}
-                    <div class="alert success">
-                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                        <strong>Success!</strong> {{message}}
+
+                  <div class="float-parent-element w3-container" style="width: 100%;">
+                    <div class="float-child-element">
+                      <div class="w3-container">
+                        <p>Please upload your CSV file below</p><br>
+                      </div>
+                      <form action = "http://localhost:5000/uploader" method = "POST" enctype = "multipart/form-data">
+                        <label class="custom-file-upload">
+                            <input type = "file" id="csvFile" name = "file"/>
+                            <br><br>
+                            <i class="fa fa-cloud-upload fa-lg"></i>
+                            <h4 style="color: grey;">Click to Select File</h4>
+                        </label><br>
+                        <br>
+                        <button type="submit" id="fcf-button" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block">Upload</button>
+                        {% if message %}
+                        <div class="alert">
+                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                            <strong>Failed!</strong> {{message}}
+                        </div>
+                        {% else %}
+                        <div class="alert success">
+                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                            <strong>Success!</strong> {{message}}
+                        </div>
+                        {% endif %}  
+                      </form><br>
                     </div>
-                    {% endif %}  
-                  </form><br>
-                  <form class="grid" action="/result" method="POST">
-                    {% if name %}
-                      <center>
-                        <h3 style="color: blue;" class="let_space">Your Target is: {{name}}</h3>
-                      </center> 
-                    {% endif %} 
-                    <label for="name">Enter your name:</label>
-                    <input type="text" id="name" name="name">
-                    <label for="accuracy">Enter your target accuracy:</label>
-                    <input type="text" id="accuracy" name="accuracy">
-                    <center><input class="file_submit" type="Submit"></center>
-                  </form>
-                  
+                    <div class="float-child-element">
+                    <img src="/static/images/sampleT.png" style="width: 90%; height: 300px;">
+                    </div>
+                    <div class="float-child-element" style="width: 100%;">
+                      <form class="grid" action="/result" method="POST">
+                        {% if name %}
+                          <center>
+                            <h3 style="color: blue;" class="let_space">Your Target is: {{name}}</h3>
+                          </center> 
+                        {% endif %} 
+                        <label for="name">Enter your target name:</label>
+                        <input type="text" id="name" name="name"><br><br>
+                        <label for="accuracy">Enter your target accuracy:</label>
+                        <input type="text" id="accuracy" name="accuracy"><br>
+                        <br>
+                        <center><input class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block" type="Submit"></center>
+                      </form>
+                </div>
+
+                </div>
                 <!-- <form class="project" action="/result" method="POST">
                   {% if name %}
                       <center>
@@ -238,98 +252,6 @@
                   </ul>
                 </div>
                 <hr>
-                <!-- <form action="yufeicaimail@gmail.com"
-                  method="POST"
-                  enctype="multipart/form-data"
-                  name="EmailForm">
-                      Name:<br>
-                      <input type="text" size="19" name="Contact-Name"><br><br>
-                      Email:<br>
-                      <input type="email" name="Contact-Email"><br><br> 
-                      Message:<br> 
-                      <textarea name="Contact-Message" rows="6″ cols="20″>
-                      </textarea><br><br> 
-                      <button type="submit" value="Submit">Send</button>
-                </form>  -->
-                <link href="static/contact-form.css" rel="stylesheet">
-
-<div class="fcf-body">
-
-    <div id="fcf-form">
-    <h3 class="fcf-h3">Contact us</h3>
-
-    <form id="fcf-form-id" class="fcf-form-class" method="post" action="/ask">
-        
-        <div class="fcf-form-group">
-            <label for="Name" class="fcf-label">Your name</label>
-            <div class="fcf-input-group">
-                <input type="text" id="Name" name="Name" class="fcf-form-control" required>
-            </div>
-        </div>
-
-        <div class="fcf-form-group">
-            <label for="Email" class="fcf-label">Your email address</label>
-            <div class="fcf-input-group">
-                <input type="email" id="Email" name="Email" class="fcf-form-control" required>
-            </div>
-        </div>
-
-        <div class="fcf-form-group">
-            <label for="Message" class="fcf-label">Your message</label>
-            <div class="fcf-input-group">
-                <textarea id="Message" name="Message" class="fcf-form-control" rows="6" maxlength="3000" required></textarea>
-            </div>
-        </div>
-
-        <div class="fcf-form-group">
-            <button type="submit" id="fcf-button" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block">Send Message</button>
-        </div>
-
-        <div class="fcf-credit" id="fcf-credit">
-        Simple HTML email form provided by <a href="https://www.majesticform.com" target="_blank">MajesticForm</a>
-        </div>
-
-    </form>
-    </div>
-
-</div>
-
-
-
-
-
-
-
-
-
-
-<!-- 
-
-                <div class="w3-card w3-margin containerm">
-                  <div class="w3-container w3-padding">
-                    <h4>Send Questions</h4>
-                  </div>
-                  <form action="/action_page.php">
-                    <label for="fname">First Name</label>
-                    <input type="text" id="fname" name="firstname" placeholder="Your name..">
-
-                    <label for="lname">Last Name</label>
-                    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
-
-                    <label for="country">Country</label>
-                    <select id="country" name="country">
-                      <option value="australia">Australia</option>
-                      <option value="canada">Canada</option>
-                      <option value="usa">USA</option>
-                    </select>
-
-                    <label for="subject">Subject</label>
-                    <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
-
-                    <input type="submit" value="Submit">
-                  </form>
-                </div>
-               -->
                 <!-- Labels / tags -->
                 <div class="w3-card w3-margin">
                   <div class="w3-container w3-padding">
@@ -343,6 +265,40 @@
                   </p>
                   </div>
                 </div>
+                <hr>
+                <!-- ------- Contact Me -------- -->
+                <div class="w3-card w3-margin fcf-body">
+                    <div id="fcf-form w3-container w3-padding">
+                    <h3 class="fcf-h3">Q & A</h3>
+                    <form id="fcf-form-id" class="fcf-form-class" method="post" action="/ask">
+                        <div class="fcf-form-group">
+                            <label for="Name" class="fcf-label">Your name</label>
+                            <div class="fcf-input-group">
+                                <input type="text" id="Name" name="Name" class="fcf-form-control" required>
+                            </div>
+                        </div>
+                        <div class="fcf-form-group">
+                            <label for="Email" class="fcf-label">Your email address</label>
+                            <div class="fcf-input-group">
+                                <input type="email" id="Email" name="Email" class="fcf-form-control" required>
+                            </div>
+                        </div>
+                        <div class="fcf-form-group">
+                            <label for="Message" class="fcf-label">Your message</label>
+                            <div class="fcf-input-group">
+                                <textarea id="Message" name="Message" class="fcf-form-control" rows="6" maxlength="3000" required></textarea>
+                            </div>
+                        </div>
+                        <div class="fcf-form-group">
+                            <button type="submit" id="fcf-button" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block">Send Question</button>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+
+
+
+
 
 
                 </div>

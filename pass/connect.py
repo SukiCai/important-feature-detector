@@ -54,7 +54,12 @@ def upload_file():
 
 @app.route('/ask', methods=['POST'])
 def ask():
-    result = subprocess.run(['php', '/static/contact-form-process.php'], stdout=subprocess.PIPE, check=True)
+    subprocess.call(["php","code/pass/contact-form-process.php"],stdout=subprocess.PIPE)
+    # path = r"code/pass/contact-form-process.php"
+    # assert os.path.isfile(path)
+    # with open(path, "r") as f:
+    #     subprocess.call(path)
+    # pass
     return render_template('project.html')
 
 
